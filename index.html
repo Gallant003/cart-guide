@@ -43,7 +43,9 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
 /* ── HEADER ── */
 .header{
   background:var(--bg);
-  padding:max(52px,calc(env(safe-area-inset-top)+24px)) 20px 14px;
+  padding:max(52px,calc(env(safe-area-inset-top)+24px)) 20px 16px;
+  padding-left:max(20px,env(safe-area-inset-left));
+  padding-right:max(20px,env(safe-area-inset-right));
 }
 .header-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.18em;color:var(--faint);margin-bottom:10px;text-transform:uppercase;}
 .header-title{font-family:'Lora',serif;font-size:28px;font-weight:600;color:var(--text);letter-spacing:-0.02em;line-height:1.1;}
@@ -167,18 +169,18 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
 
 /* ── SEARCH ── */
 .sticky-search{position:sticky;top:49px;z-index:50;padding:12px 0 6px;margin:0;background:#f2f2f7;}
-.search-wrap{position:relative;background:#f5f1ea;}
+.search-wrap{position:relative;background:#f2f2f7;}
 .search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:14px;pointer-events:none;z-index:1;}
 .search-input{
   width:100%;
-  background:#fdfcf8 !important;
+  background:#ffffff !important;
   -webkit-appearance:none !important;
   appearance:none !important;
-  border:1.5px solid #e8e2d9 !important;
+  border:1.5px solid #e0e0e5 !important;
   border-radius:10px !important;
   -webkit-border-radius:10px !important;
   padding:12px 14px 12px 40px !important;
-  color:#252018 !important;
+  color:#1c1c1e !important;
   font-size:16px !important;
   font-family:'DM Sans',sans-serif !important;
   outline:none !important;
@@ -192,7 +194,6 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
   box-shadow:0 0 0 3px rgba(74,110,82,0.1) !important;
   -webkit-box-shadow:0 0 0 3px rgba(74,110,82,0.1) !important;
 }
-.search-input:focus{border-color:var(--sage-light);box-shadow:0 0 0 3px rgba(74,110,82,0.1),var(--shadow);}
 .result-count{font-size:11px;color:var(--faint);margin-top:5px;padding-left:2px;}
 
 /* ── QUALITY BAR ── */

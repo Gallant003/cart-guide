@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
+<title>Cart Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root {
+  --bg:          #f2f2f7;
+  --surface:     #ffffff;
+  --surface2:    #f9f9f9;
+  --border:      #e0e0e5;
+  --border2:     #c8c8d0;
+  --text:        #1c1c1e;
+  --text2:       #3a3a3c;
+  --muted:       #6c6c70;
+  --faint:       #aeaeb2;
+  --sage:        #4a6e52;
+  --sage-light:  #6a9070;
+  --sage-bg:     #edf4ee;
+  --sage-border: #bdd4c0;
+  --amber:       #7a5e20;
+  --amber-bg:    #faf0d8;
+  --amber-border:#d4b870;
+  --rose:        #7a3030;
+  --rose-bg:     #faf0f0;
+  --rose-border: #d49090;
+  --gold:        #8a6818;
+  --gold-bg:     #fdf5e0;
+  --gold-border: #d4b040;
+  --radius:      14px;
+  --radius-sm:   10px;
+  --shadow:      0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  --shadow-hover:0 2px 6px rgba(0,0,0,0.08), 0 8px 20px rgba(0,0,0,0.06);
+}
+
+html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+/* ── HEADER ── */
+.header{
+  background:var(--bg);
+  padding:max(52px,calc(env(safe-area-inset-top)+24px)) 20px 14px;
+}
+.header-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.18em;color:var(--faint);margin-bottom:10px;text-transform:uppercase;}
+.header-title{font-family:'Lora',serif;font-size:28px;font-weight:600;color:var(--text);letter-spacing:-0.02em;line-height:1.1;}
+.header-rule{width:28px;height:2px;background:var(--sage);border-radius:2px;margin:10px 0 8px;}
+.header-sub{font-size:13px;color:var(--muted);font-weight:300;letter-spacing:0.01em;font-style:italic;font-family:'Lora',serif;margin-bottom:4px;}
+
+/* ── TABS ── */
+.tab-bar{
+  display:flex;overflow-x:auto;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:0 6px;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 1px 0 var(--border),0 2px 8px rgba(0,0,0,0.04);
+}
+.tab-bar::-webkit-scrollbar{display:none;}
+.tab-btn{
+  flex-shrink:0;background:none;border:none;
+  border-bottom:2px solid transparent;
+  color:var(--faint);
+  font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:500;
+  padding:14px 14px 12px;cursor:pointer;
+  white-space:nowrap;
+  transition:color 0.2s,border-color 0.2s;
+  -webkit-tap-highlight-color:transparent;
+  letter-spacing:0.01em;
+}
+.tab-btn.active{color:var(--sage);border-bottom-color:var(--sage);font-weight:600;}
+
+/* ── CONTENT ── */
+.content{padding:20px 16px 80px;max-width:680px;margin:0 auto;}
+.page{display:none;flex-direction:column;gap:12px;}
+.page.active{display:flex;}
+
+/* ── CARDS ── */
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px 18px;
+  box-shadow:var(--shadow);
+  transition:box-shadow 0.2s,transform 0.15s;
+}
+.card:active{box-shadow:var(--shadow-hover);transform:scale(0.995);}
+
+.card-sage  {background:var(--sage-bg); border:1px solid var(--sage-border); border-radius:var(--radius);padding:14px 18px;}
+.card-amber {background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:var(--radius);padding:14px 18px;}
+.card-rose  {background:var(--rose-bg); border:1px solid var(--rose-border); border-radius:var(--radius);padding:14px 18px;}
+.card-gold  {background:var(--gold-bg); border:1px solid var(--gold-border); border-radius:var(--radius);padding:16px 18px;}
+
+/* North star card — special treatment */
+.card-northstar{
+  background:linear-gradient(135deg,#eef5ec 0%,#f5f9f4 100%);
+  border:1.5px solid #a8caa8;
+  border-radius:var(--radius);padding:18px 20px;
+  box-shadow:0 2px 8px rgba(74,110,82,0.12),0 0 0 4px rgba(74,110,82,0.04);
+}
+
+/* ── SECTION LABELS ── */
+.section-label{
+  font-size:10px;font-weight:700;letter-spacing:0.14em;
+  text-transform:uppercase;margin-top:20px;margin-bottom:6px;
+  display:flex;align-items:center;gap:8px;
+}
+.section-label::after{content:'';flex:1;height:1px;background:currentColor;opacity:0.15;}
+.section-label:first-child{margin-top:0;}
+.section-label.sage  {color:var(--sage);}
+.section-label.rose  {color:var(--rose);}
+.section-label.amber {color:var(--amber);}
+.section-label.muted {color:var(--muted);}
+.section-label.gold  {color:var(--gold);}
+
+/* ── STRAIN ROWS ── */
+.strain-row{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px 16px;
+  display:flex;align-items:flex-start;gap:12px;
+  box-shadow:var(--shadow);
+  transition:box-shadow 0.15s;
+}
+.strain-row:active{box-shadow:var(--shadow-hover);}
+.strain-row.northstar{background:linear-gradient(135deg,#eef5ec,#f5f9f4);border:1.5px solid #a8caa8;box-shadow:0 2px 8px rgba(74,110,82,0.1);}
+.strain-row.fav      {background:var(--surface);border-color:#d4c898;}
+.strain-row.caution  {background:var(--amber-bg);border-color:var(--amber-border);}
+.strain-row.avoid-row{background:var(--rose-bg);border-color:var(--rose-border);}
+
+.strain-left{width:4px;border-radius:4px;align-self:stretch;flex-shrink:0;}
+.northstar .strain-left{background:var(--sage);}
+.fav .strain-left      {background:#c8b060;}
+.caution .strain-left  {background:var(--amber);}
+.avoid-row .strain-left{background:var(--rose);}
+.strain-row:not(.northstar):not(.fav):not(.caution):not(.avoid-row) .strain-left{background:var(--border2);}
+
+.strain-body{flex:1;min-width:0;}
+.strain-name{font-family:'Lora',serif;font-size:15px;font-weight:600;color:var(--text);line-height:1.3;}
+.strain-notes{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.5;font-style:italic;}
+.strain-cap{font-size:11px;color:var(--faint);margin-top:5px;}
+.strain-meta{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;}
+.strain-date{font-size:10.5px;color:var(--faint);font-weight:400;}
+
+/* ── RANK BADGE ── */
+.rank-badge{
+  font-size:9.5px;font-weight:700;
+  color:var(--gold);background:var(--gold-bg);
+  border:1px solid var(--gold-border);
+  border-radius:999px;padding:2px 9px;letter-spacing:0.05em;
+}
+
+/* ── TYPE BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:999px;white-space:nowrap;letter-spacing:0.01em;}
+.badge-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.badge-indica  {background:#ede9f2;color:#5e4470;}.badge-indica .badge-dot  {background:#9070b0;}
+.badge-sativa  {background:#e8f0ea;color:#325a38;}.badge-sativa .badge-dot  {background:#5a9060;}
+.badge-hybrid  {background:#f2eeea;color:#6a5530;}.badge-hybrid .badge-dot  {background:#a88850;}
+.badge-hybrid-s{background:#e6efee;color:#285850;}.badge-hybrid-s .badge-dot{background:#489088;}
+.badge-hybrid-i{background:#ede9f4;color:#503868;}.badge-hybrid-i .badge-dot{background:#7858a8;}
+.badge-default {background:#edeae6;color:#585048;}.badge-default .badge-dot {background:#908070;}
+
+/* ── SEARCH ── */
+.sticky-search{position:sticky;top:49px;z-index:50;padding:12px 0 6px;margin:0;background:#f2f2f7;}
+.search-wrap{position:relative;background:#f5f1ea;}
+.search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:14px;pointer-events:none;z-index:1;}
+.search-input{
+  width:100%;
+  background:#fdfcf8 !important;
+  -webkit-appearance:none !important;
+  appearance:none !important;
+  border:1.5px solid #e8e2d9 !important;
+  border-radius:10px !important;
+  -webkit-border-radius:10px !important;
+  padding:12px 14px 12px 40px !important;
+  color:#252018 !important;
+  font-size:16px !important;
+  font-family:'DM Sans',sans-serif !important;
+  outline:none !important;
+  box-shadow:none !important;
+  -webkit-box-shadow:none !important;
+  display:block;
+  margin:0;
+}
+.search-input:focus{
+  border-color:#6a9070 !important;
+  box-shadow:0 0 0 3px rgba(74,110,82,0.1) !important;
+  -webkit-box-shadow:0 0 0 3px rgba(74,110,82,0.1) !important;
+}
+.search-input:focus{border-color:var(--sage-light);box-shadow:0 0 0 3px rgba(74,110,82,0.1),var(--shadow);}
+.result-count{font-size:11px;color:var(--faint);margin-top:5px;padding-left:2px;}
+
+/* ── QUALITY BAR ── */
+.quality-bar{display:flex;gap:3px;margin-top:12px;}
+.quality-seg{flex:1;height:3px;border-radius:2px;}
+
+/* ── PROTOCOL ── */
+.protocol-item{border-left:2px solid var(--sage-border);padding-left:16px;padding-top:2px;padding-bottom:2px;}
+
+/* ── TERPENE TAG ── */
+.terp-tag{display:inline-block;font-size:12px;padding:4px 12px;border-radius:999px;font-weight:500;margin:3px 3px 3px 0;}
+.terp-good{background:var(--sage-bg);color:var(--sage);border:1px solid var(--sage-border);}
+.terp-bad {background:var(--rose-bg);color:var(--rose);border:1px solid var(--rose-border);}
+
+/* ── DISPENSARY CARD ── */
+.dispo-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.dispo-header{padding:14px 18px 10px;border-bottom:1px solid var(--border);}
+.dispo-body{padding:12px 18px 14px;display:flex;flex-direction:column;gap:4px;}
+.dispo-featured{background:linear-gradient(135deg,var(--sage-bg),#f0f7f0);border-color:var(--sage-border);}
+.dispo-featured .dispo-header{background:linear-gradient(135deg,rgba(74,110,82,0.06),transparent);}
+.dispo-tag{font-size:9.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);background:var(--sage-bg);border:1px solid var(--sage-border);border-radius:999px;padding:2px 8px;display:inline-block;margin-bottom:4px;}
+
+/* ── LINK BUTTON ── */
+.link-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--sage);background:var(--sage-bg);border:1px solid var(--sage-border);border-radius:8px;padding:5px 12px;text-decoration:none;transition:opacity 0.15s;}
+.link-btn:active{opacity:0.7;}
+
+/* ── EMPTY ── */
+.empty{text-align:center;color:var(--faint);padding:48px 20px;font-size:14px;font-style:italic;font-family:'Lora',serif;}
+
+/* ── UTILITY ── */
+.lora{font-family:'Lora',serif;}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.row-start{display:flex;align-items:center;gap:8px;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-eyebrow">Pleasantrees · Sterling Heights</div>
+  <div class="header-title">Cart Guide</div>
+  <div class="header-rule"></div>
+  <div class="header-sub">A curated reference for finding the right cart, every time.</div>
+</div>
+
+<!-- TABS -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab(0)">History</button>
+  <button class="tab-btn" onclick="showTab(1)">Terpene Guide</button>
+  <button class="tab-btn" onclick="showTab(2)">Strains</button>
+  <button class="tab-btn" onclick="showTab(3)">Brands</button>
+  <button class="tab-btn" onclick="showTab(4)">Where to Shop</button>
+  <button class="tab-btn" onclick="showTab(5)">At the Shop</button>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════════ HISTORY -->
+<div class="page active" id="page-0">
+  <div class="sticky-search">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="searchInput" placeholder="Search strains, notes, or type…" oninput="filterHistory()"/>
+    </div>
+    <div class="result-count" id="resultCount"></div>
+  </div>
+  <div id="historyList"></div>
+</div>
+
+<!-- ═══════════════════════════════════════ TERPENE GUIDE -->
+<div class="page" id="page-1">
+
+  <div class="card-northstar">
+    <div class="lora" style="font-size:17px;font-weight:600;color:var(--text);margin-bottom:10px;">What to Look For</div>
+    <p style="font-size:13.5px;color:var(--text2);line-height:1.75;">
+      The best carts are <strong style="color:var(--sage);">caryophyllene-dominant, linalool-supported, and low in limonene.</strong>
+      These terpenes keep things calm, smooth, and grounded — no jitters, no racing heart, no rocket launch.
+      Binske Jungle Pie and Italian Wedding Cake are the gold standard examples.
+    </p>
+  </div>
+
+  <div class="section-label sage">Terpenes to Seek</div>
+
+  <div class="card">
+    <div class="row-start" style="margin-bottom:6px;">
+      <span class="terp-tag terp-good">Caryophyllene</span>
+      <span style="font-size:10px;color:var(--sage);font-weight:600;">PRIMARY</span>
+    </div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.6;">Anti-anxiety, smooth heart rate, anti-inflammatory. This is your anchor — it needs to be first or second on the label.</div>
+  </div>
+
+  <div class="card">
+    <div style="margin-bottom:6px;"><span class="terp-tag terp-good">Linalool</span></div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.6;">Calm, open mood, no brain fog. Works with caryophyllene to keep the headspace clear and relaxed.</div>
+  </div>
+
+  <div class="card">
+    <div style="margin-bottom:6px;"><span class="terp-tag terp-good">Myrcene</span></div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.6;">Body relaxation and gentle onset. Slows things down in the best way — no sudden launch.</div>
+  </div>
+
+  <div class="card">
+    <div style="margin-bottom:6px;">
+      <span class="terp-tag terp-good">Bisabolol</span>
+      <span class="terp-tag terp-good">Humulene</span>
+    </div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.6;">Soothing secondary support. Grounding body feel without heaviness.</div>
+  </div>
+
+  <div class="section-label rose">Terpenes to Avoid</div>
+
+  <div class="card-rose" style="border-radius:var(--radius);">
+    <div style="margin-bottom:6px;"><span class="terp-tag terp-bad">Limonene</span><span style="font-size:11px;color:var(--rose);margin-left:6px;font-weight:600;">when dominant</span></div>
+    <div style="font-size:13px;color:var(--rose);line-height:1.6;">The jitter culprit. Fine as a background note — bad when it's #1 on the label.</div>
+  </div>
+
+  <div class="card-rose" style="border-radius:var(--radius);">
+    <div style="margin-bottom:6px;"><span class="terp-tag terp-bad">Pinene</span><span style="font-size:11px;color:var(--rose);margin-left:6px;font-weight:600;">when high</span></div>
+    <div style="font-size:13px;color:var(--rose);line-height:1.6;">Overstimulation and racing thoughts. Avoid anything where this appears near the top.</div>
+  </div>
+
+  <div class="card-rose" style="border-radius:var(--radius);">
+    <div style="margin-bottom:6px;"><span class="terp-tag terp-bad">Ocimene</span><span style="font-size:11px;color:var(--rose);margin-left:6px;font-weight:600;">when dominant</span></div>
+    <div style="font-size:13px;color:var(--rose);line-height:1.6;">Fruity rocket fuel. Too fast, too much, too anxious.</div>
+  </div>
+
+  <div class="card-amber" style="border-radius:var(--radius);margin-top:4px;">
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--amber);margin-bottom:10px;">WHY ITALIAN WEDDING CAKE WORKS</div>
+    <div style="font-size:13px;color:var(--amber);line-height:2.1;">
+      High caryophyllene → anxiety reduction, smooth heart rate<br>
+      Good linalool → calm, relaxed, open mood<br>
+      Bisabolol + humulene → soothing body feel<br>
+      Low limonene → enjoyable without the jitters<br>
+      Low pinene → no overstimulation<br>
+      Slow, gentle onset → no rocket launch
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════ STRAINS -->
+<div class="page" id="page-2">
+
+  <div class="card-northstar">
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;color:var(--sage);margin-bottom:8px;">NORTH STAR</div>
+    <div class="lora" style="font-size:17px;font-weight:600;color:var(--text);">Binske · Jungle Pie</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.6;font-style:italic;">Clear, calm, zero anxiety, fully functional. The benchmark for everything else. If a new cart is this good, it passes.</div>
+  </div>
+
+  <div class="section-label sage">Confirmed Safe — Wedding Cake Line</div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Italian Wedding Cake ⭐</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Wedding Cake</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Ice Cream Cake</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Pink Cookies</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Jungle Cake</span></div>
+
+  <div class="section-label sage">Confirmed Safe — Gelato Hybrids</div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Lemon Cherry Gelato</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Gelato #41 / #33</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Berry Gelato</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Georgia Pie</span></div>
+
+  <div class="section-label sage">Confirmed Safe — Mild Hybrids</div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">GMO Cookies</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Garlic Breath</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Pure Michigan</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Donny Burger</span></div>
+
+  <div class="section-label sage">Confirmed Safe — Ultra-Calm</div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Purple Punch</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Oreoz</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Zkittlez</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Apple Fritter</span></div>
+  <div class="card-sage"><span class="lora" style="font-size:14px;color:var(--sage);">Jealousy</span></div>
+
+  <div class="section-label muted">Worth Trying</div>
+  <div class="card"><span class="lora" style="font-size:14px;">Kush Mints 🍪</span></div>
+  <div class="card"><span class="lora" style="font-size:14px;">Layer Cake 🍰</span></div>
+  <div class="card"><span class="lora" style="font-size:14px;">Chocolate OG 🍫</span></div>
+  <div class="card"><span class="lora" style="font-size:14px;">Mochi Gelato 🌙</span></div>
+  <div class="card"><span class="lora" style="font-size:14px;">Sherb Cake 🍨</span></div>
+  <div class="card"><span class="lora" style="font-size:14px;">Marshmallow OG</span></div>
+  <div class="card"><span class="lora" style="font-size:14px;">White Truffle</span></div>
+  <div class="card"><span class="lora" style="font-size:14px;">Slurricane</span></div>
+  <div class="card"><span class="lora" style="font-size:14px;">Gush Mints</span></div>
+
+  <div class="section-label amber">Use Carefully</div>
+  <div class="card-amber"><div class="lora" style="font-size:14px;color:var(--amber);">Strawberry Candy</div><div style="font-size:12px;color:var(--amber);margin-top:3px;opacity:0.8;">Energetic — watch limonene levels</div></div>
+  <div class="card-amber"><div class="lora" style="font-size:14px;color:var(--amber);">Octane Mint Sherb</div><div style="font-size:12px;color:var(--amber);margin-top:3px;opacity:0.8;">Strong — dose slowly</div></div>
+  <div class="card-amber"><div class="lora" style="font-size:14px;color:var(--amber);">Twisted Fruit Cake</div><div style="font-size:12px;color:var(--amber);margin-top:3px;opacity:0.8;">60/40 — ocimene risk</div></div>
+  <div class="card-amber"><div class="lora" style="font-size:14px;color:var(--amber);">Grandi Guava</div><div style="font-size:12px;color:var(--amber);margin-top:3px;opacity:0.8;">Verify low limonene first</div></div>
+
+  <div class="section-label rose">Avoid</div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Grape Gas</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Strawberry Cough</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Durban Poison</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Green Crack</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Tangie</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Orange Creamsicle</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Tropical Runtz</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Papaya Punch</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Mimosa</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Strawberry Lemonade</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">MAC #1</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Super Lemon Haze</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Jack Herer</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Pineapple Express</span></div>
+  <div class="card-rose"><span class="lora" style="font-size:14px;color:var(--rose);">Cereal Milk</span></div>
+
+</div>
+
+<!-- ═══════════════════════════════════════ BRANDS -->
+<div class="page" id="page-3">
+
+  <div class="card">
+    <p style="font-size:13px;color:var(--muted);line-height:1.7;">Brand matters as much as strain. A great strain in a bad cart means additives, harsh hits, and unknown filler. These are the ones we trust — and the one we don't.</p>
+  </div>
+
+  <div class="section-label sage">Trusted</div>
+
+  <div class="card">
+    <div class="row" style="margin-bottom:8px;">
+      <div class="lora" style="font-size:16px;font-weight:600;">Binske</div>
+      <span style="font-size:11px;font-weight:700;color:var(--sage);background:var(--sage-bg);border:1px solid var(--sage-border);border-radius:999px;padding:2px 10px;">Trusted</span>
+    </div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Ceramic carts, live hash rosin, zero additives. Cultivated by Pleasantrees directly. The most reliable premium option on the shelf.</div>
+    <div class="quality-bar"><div class="quality-seg" style="background:var(--sage);"></div><div class="quality-seg" style="background:var(--sage);"></div><div class="quality-seg" style="background:var(--sage);"></div><div class="quality-seg" style="background:var(--sage);"></div><div class="quality-seg" style="background:var(--sage);"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="row" style="margin-bottom:8px;">
+      <div class="lora" style="font-size:16px;font-weight:600;">Element Extractions</div>
+      <span style="font-size:11px;font-weight:700;color:var(--sage);background:var(--sage-bg);border:1px solid var(--sage-border);border-radius:999px;padding:2px 10px;">Trusted</span>
+    </div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px;">100% pure live resin. No distillate, no botanical terpenes, no additives. Fresh frozen flower, fully transparent lab results.</div>
+    <div class="quality-bar"><div class="quality-seg" style="background:var(--sage);"></div><div class="quality-seg" style="background:var(--sage);"></div><div class="quality-seg" style="background:var(--sage);"></div><div class="quality-seg" style="background:var(--sage);"></div><div class="quality-seg" style="background:var(--sage);"></div></div>
+  </div>
+
+  <div class="card">
+    <div class="row" style="margin-bottom:8px;">
+      <div class="lora" style="font-size:16px;font-weight:600;">Pleasantrees House</div>
+      <span style="font-size:11px;font-weight:700;color:var(--sage);background:var(--sage-bg);border:1px solid var(--sage-border);border-radius:999px;padding:2px 10px;">Trusted</span>
+    </div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Seed-to-sale. They grow it, extract it, and sell it themselves. Full COA always available. The safe default.</div>
+    <div class="quality-bar"><div class="quality-seg" style="background:var(--sage);"></div><div class="quality-seg" style="background:var(--sage);"></div><div class="quality-seg" style="background:var(--sage);"></div><div class="quality-seg" style="background:var(--sage);"></div><div class="quality-seg" style="background:var(--sage);"></div></div>
+  </div>
+
+  <div class="section-label muted">Vetted</div>
+
+  <div class="card">
+    <div class="row" style="margin-bottom:8px;">
+      <div class="lora" style="font-size:16px;font-weight:600;">Fresh Coast Extracts</div>
+      <span style="font-size:11px;font-weight:700;color:var(--amber);background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:999px;padding:2px 10px;">Vetted</span>
+    </div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px;">100% liquid live resin, no fillers. Top-selling live resin cart in Michigan. Ask for the COA before buying.</div>
+    <div class="quality-bar"><div class="quality-seg" style="background:var(--amber);"></div><div class="quality-seg" style="background:var(--amber);"></div><div class="quality-seg" style="background:var(--amber);"></div><div class="quality-seg" style="background:var(--amber);"></div><div class="quality-seg" style="background:var(--border2);"></div></div>
+  </div>
+
+  <div class="section-label rose">Do Not Buy</div>
+
+  <div class="card-rose" style="border-radius:var(--radius);">
+    <div class="row" style="margin-bottom:6px;">
+      <div class="lora" style="font-size:16px;font-weight:600;color:var(--rose);">Platinum Vape</div>
+      <span style="font-size:11px;font-weight:700;color:var(--rose);background:var(--rose-bg);border:1px solid var(--rose-border);border-radius:999px;padding:2px 10px;">Recalled</span>
+    </div>
+    <div style="font-size:13px;color:var(--rose);line-height:1.6;opacity:0.85;">Recalled for leaks. Hard no, regardless of strain or price.</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════ WHERE TO SHOP -->
+<div class="page" id="page-4">
+
+  <div class="card">
+    <div class="lora" style="font-size:16px;font-weight:600;margin-bottom:8px;">Finding Carts Online</div>
+    <p style="font-size:13px;color:var(--muted);line-height:1.7;">Dispensary websites are notoriously bad. Filters reset, menus are slow, and terpene info is buried or missing. Here's the least-painful way through them.</p>
+  </div>
+
+  <div class="section-label sage">Best Sites to Use</div>
+
+  <div class="card">
+    <div class="row" style="margin-bottom:8px;">
+      <div class="lora" style="font-size:15px;font-weight:600;">Leafly</div>
+      <a href="https://leafly.com" class="link-btn">leafly.com ↗</a>
+    </div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.65;">Best for terpene research. Search any strain name and see typical terpene profiles, effects, and reviews. Filters stay put when you go back. Use this when you see an unfamiliar strain name.</div>
+  </div>
+
+  <div class="card">
+    <div class="row" style="margin-bottom:8px;">
+      <div class="lora" style="font-size:15px;font-weight:600;">Weedmaps</div>
+      <a href="https://weedmaps.com" class="link-btn">weedmaps.com ↗</a>
+    </div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.65;">Best for browsing multiple shops at once. Filter to Vape Cartridges and see what's in stock nearby. Wider shop coverage than Leafly, less terpene detail.</div>
+  </div>
+
+  <div class="card">
+    <div class="row" style="margin-bottom:8px;">
+      <div class="lora" style="font-size:15px;font-weight:600;">Pleasantrees Direct</div>
+      <a href="https://enjoypleasantrees.com/categories/vaporizers/cartridges/" class="link-btn">shop ↗</a>
+    </div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.65;">Their own live inventory. Slow and filter-heavy but most accurate for what's actually in stock right now. Confirm here before making a trip.</div>
+  </div>
+
+  <div class="section-label muted">How to Use Leafly</div>
+  <div class="card">
+    <div style="font-size:13px;color:var(--muted);line-height:2.0;">
+      1. Go to leafly.com → tap <strong style="color:var(--text2);">Dispensaries</strong><br>
+      2. Search <strong style="color:var(--text2);">Sterling Heights, MI</strong><br>
+      3. Tap a shop → tap <strong style="color:var(--text2);">Menu</strong><br>
+      4. Filter: <strong style="color:var(--text2);">Vape → Cartridge</strong><br>
+      5. Tap a strain → scroll to <strong style="color:var(--text2);">Terpenes</strong><br>
+      6. Is Caryophyllene first or second? → cross-check the Strains tab
+    </div>
+  </div>
+
+  <div class="section-label muted">How to Use Weedmaps</div>
+  <div class="card">
+    <div style="font-size:13px;color:var(--muted);line-height:2.0;">
+      1. Go to weedmaps.com → allow location<br>
+      2. Tap <strong style="color:var(--text2);">Dispensaries</strong> → pick a shop<br>
+      3. Tap <strong style="color:var(--text2);">Menu</strong> → filter: <strong style="color:var(--text2);">Vape Cartridge</strong><br>
+      4. Tap unknown strain → look it up on Leafly separately<br>
+      5. Use the site's back button — not Safari's — to keep filters
+    </div>
+  </div>
+
+  <div class="section-label sage">Nearby Dispensaries</div>
+
+  <div class="dispo-card dispo-featured">
+    <div class="dispo-header">
+      <div class="dispo-tag">First Stop</div>
+      <div class="row">
+        <div class="lora" style="font-size:15px;font-weight:600;color:var(--sage);">Pleasantrees – Mt. Clemens</div>
+        <span style="font-size:11px;color:var(--sage);font-weight:600;">~15 min</span>
+      </div>
+    </div>
+    <div class="dispo-body">
+      <div style="font-size:13px;color:var(--text2);">237 N River Rd · (586) 221-0020</div>
+      <div style="font-size:12px;color:var(--muted);">Mon–Sat 9AM–9PM · Sun 10AM–8PM</div>
+      <div style="font-size:12.5px;color:var(--sage);margin-top:4px;">Trusted brand. Full COA always available.</div>
+    </div>
+  </div>
+
+  <div class="dispo-card">
+    <div class="dispo-header">
+      <div class="row">
+        <div class="lora" style="font-size:15px;font-weight:600;">Cloud Cannabis – Utica</div>
+        <span style="font-size:11px;color:var(--muted);font-weight:600;">~10 min</span>
+      </div>
+    </div>
+    <div class="dispo-body">
+      <div style="font-size:13px;color:var(--text2);">44115 Van Dyke Ave · (586) 788-7501</div>
+      <div style="font-size:12px;color:var(--muted);">Daily 9AM–10PM · 4.8★ · 9,000+ reviews</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:4px;">Closest option. Wide selection. Always ask for COA.</div>
+    </div>
+  </div>
+
+  <div class="dispo-card">
+    <div class="dispo-header">
+      <div class="row">
+        <div class="lora" style="font-size:15px;font-weight:600;">JARS Cannabis – Utica</div>
+        <span style="font-size:11px;color:var(--muted);font-weight:600;">~12 min</span>
+      </div>
+    </div>
+    <div class="dispo-body">
+      <div style="font-size:13px;color:var(--text2);">45221 Utica Park Blvd · (586) 330-4269</div>
+      <div style="font-size:12px;color:var(--muted);">Daily until midnight · 5.0★</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:4px;">Large selection, open late. Good for variety hunting.</div>
+    </div>
+  </div>
+
+  <div class="dispo-card">
+    <div class="dispo-header">
+      <div class="row">
+        <div class="lora" style="font-size:15px;font-weight:600;">PUFF Cannabis – Utica</div>
+        <span style="font-size:11px;color:var(--muted);font-weight:600;">~10 min</span>
+      </div>
+    </div>
+    <div class="dispo-body">
+      <div style="font-size:13px;color:var(--text2);">44825 Van Dyke Ave · (586) 788-7833</div>
+      <div style="font-size:12px;color:var(--muted);">Daily until midnight · 4.7★</div>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:4px;">Large selection. Mixed reviews. Always request COA.</div>
+    </div>
+  </div>
+
+  <div class="section-label amber">Watch Out For</div>
+  <div class="card-amber" style="border-radius:var(--radius);">
+    <div style="font-size:13px;color:var(--amber);line-height:2.0;">
+      <strong>Filters reset</strong> on back-navigation on most dispensary sites<br>
+      <strong>Terpene info missing</strong> on cart pages — look up the strain on Leafly separately<br>
+      <strong>"Live resin" ≠ quality</strong> — check the brand first<br>
+      <strong>High THC ≠ better</strong> — terpenes matter more than percentage<br>
+      <strong>Stock changes daily</strong> — call ahead for specific strains
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════ AT THE SHOP -->
+<div class="page" id="page-5">
+
+  <div class="card-northstar">
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;color:var(--sage);margin-bottom:8px;">USE THIS AT THE COUNTER</div>
+    <p style="font-size:13px;color:var(--text2);line-height:1.7;">Ask these four questions in order. If they can't answer Q1 and Q2, ask to see the COA — any reputable cart will have one.</p>
+  </div>
+
+  <div class="protocol-item">
+    <div class="lora" style="font-size:14px;font-weight:600;color:var(--text);">Q1 — What's the dominant terpene?</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:5px;line-height:1.6;">Need caryophyllene 1st or 2nd. Walk away if it's limonene or pinene.</div>
+  </div>
+
+  <div class="protocol-item">
+    <div class="lora" style="font-size:14px;font-weight:600;color:var(--text);">Q2 — Is limonene high or background?</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:5px;line-height:1.6;">Background = fine. Dominant = no.</div>
+  </div>
+
+  <div class="protocol-item">
+    <div class="lora" style="font-size:14px;font-weight:600;color:var(--text);">Q3 — Fast or slow onset?</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:5px;line-height:1.6;">Slow = yes. Rocket = no.</div>
+  </div>
+
+  <div class="protocol-item">
+    <div class="lora" style="font-size:14px;font-weight:600;color:var(--text);">Q4 — Can I see the COA?</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:5px;line-height:1.6;">Binske, Element, and Pleasantrees house all have one. Any good brand will.</div>
+  </div>
+
+  <div class="card-sage" style="margin-top:8px;">
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;color:var(--sage);margin-bottom:10px;">NEAREST SHOP</div>
+    <div class="lora" style="font-size:17px;font-weight:600;color:var(--sage);">Pleasantrees – Mt. Clemens</div>
+    <div style="font-size:13px;color:var(--sage-light);margin-top:6px;">237 N River Rd · about 15 minutes away</div>
+    <div style="font-size:13px;color:var(--sage-light);">(586) 221-0020</div>
+    <div style="font-size:13px;color:var(--sage-light);">Mon–Sat 9AM–9PM · Sun 10AM–8PM</div>
+  </div>
+
+</div>
+
+</div><!-- end content -->
+
+<script>
+const history = [
+  {date:"Unknown", period:"Early",    strain:"Milk Truck",                type:"Hybrid",       color:"White",         notes:"",                                                   status:""},
+  {date:"Unknown", period:"Early",    strain:"Lemon Cherry Gelato",       type:"Hybrid",       color:"Yellow",        notes:"",                                                   status:""},
+  {date:"Unknown", period:"Early",    strain:"Cap Junky",                 type:"Hybrid",       color:"Green",         notes:"",                                                   status:""},
+  {date:"7/11/25", period:"Jul 2025", strain:"Stickee Pineapple Crush",   type:"Sativa",       color:"Green",         notes:"",                                                   status:""},
+  {date:"7/11/25", period:"Jul 2025", strain:"OG Spaghetti Dinner",       type:"Indica",       color:"Red",           notes:"",                                                   status:""},
+  {date:"7/11/25", period:"Jul 2025", strain:"Italian Wedding Cake",      type:"Hybrid",       color:"Blue",          notes:"Gold standard for calm relief",                      status:"fav"},
+  {date:"8/4/25",  period:"Aug 2025", strain:"Strawberry Candy",          type:"Sativa",       color:"Red+Green",     notes:"Energetic — watch limonene",                         status:"caution"},
+  {date:"8/4/25",  period:"Aug 2025", strain:"Grape Gas",                 type:"Hybrid",       color:"2x Blue",       notes:"High limonene/pinene — avoid",                       status:"avoid"},
+  {date:"8/4/25",  period:"Aug 2025", strain:"OG Spaghetti Dinner",       type:"Indica",       color:"Red",           notes:"Repeat buy",                                         status:""},
+  {date:"8/31/25", period:"Aug 2025", strain:"Lemon (strain TBC)",        type:"Sativa",       color:"Yellow",        notes:"",                                                   status:""},
+  {date:"9/26/25", period:"Sep 2025", strain:"Tropical Test Tube",        type:"Sativa Hybrid",color:"Green",         notes:"",                                                   status:""},
+  {date:"9/26/25", period:"Sep 2025", strain:"Strawberry Candy",          type:"Sativa",       color:"Green/Red",     notes:"Uplifting — monitor",                                status:"caution"},
+  {date:"9/26/25", period:"Sep 2025", strain:"Twisted Fruit Cake",        type:"Hybrid",       color:"Green/Red/Blue",notes:"60/40 — ocimene risk",                               status:"caution"},
+  {date:"9/26/25", period:"Sep 2025", strain:"(G)Rape Gas",               type:"Hybrid",       color:"None",          notes:"Grape Gas variant — avoid",                          status:"avoid"},
+  {date:"11/21/25",period:"Nov 2025", strain:"Fatso Big Sunday",          type:"Indica",       color:"Green",         notes:"Warm, happy, full-body melt",                        status:"fav"},
+  {date:"11/21/25",period:"Nov 2025", strain:"Purple Chem",               type:"Indica",       color:"Blue/Binske",   notes:"Deep mental calm",                                   status:"fav"},
+  {date:"11/21/25",period:"Nov 2025", strain:"Cryo Top",                  type:"Sativa",       color:"Red/Binske",    notes:"Light, happy, easy-going",                           status:"fav"},
+  {date:"12/12/25",period:"Dec 2025", strain:"Binske · Jungle Pie",       type:"Hybrid Sativa",color:"Green/Blue",    notes:"North Star — clear, calm, zero anxiety, functional", status:"northstar"},
+  {date:"12/12/25",period:"Dec 2025", strain:"Binske · Chrome Berry",     type:"Hybrid",       color:"Red/Blue",      notes:"Strong relief, softer headspace",                    status:"fav"},
+  {date:"12/12/25",period:"Dec 2025", strain:"Binske · Double Baked Cake",type:"Indica",       color:"Red/Green",     notes:"Calming, cozy — good for evenings",                  status:"fav"},
+  {date:"3/21/26", period:"Mar 2026", strain:"Element: Tally Mon",        type:"Hybrid Indica",color:"Green",         notes:"Tingly, relaxed",                                    status:"fav"},
+  {date:"3/21/26", period:"Mar 2026", strain:"Element: Red Bullz",        type:"Hybrid Sativa",color:"Red",           notes:"Focused",                                            status:"fav"},
+  {date:"3/21/26", period:"Mar 2026", strain:"Element: Grape Pie",        type:"Hybrid Indica",color:"Blue",          notes:"Body buzz, uplifting euphoria",                      status:"fav"},
+  {date:"4/23/26", period:"Apr 2026", strain:"Jungle Pie Hybrid",         type:"Hybrid Sativa",color:"Green",         notes:"Repeat of best performer",                           status:"fav"},
+  {date:"4/23/26", period:"Apr 2026", strain:"Octane Mint Sherb",         type:"Hybrid Indica",color:"Red",           notes:"Body buzz — strong, dose carefully",                 status:"caution"},
+  {date:"4/23/26", period:"Apr 2026", strain:"Zen Crusher",               type:"Hybrid",       color:"Blue",          notes:"",                                                   status:""},
+];
+
+function scoreEntry(e){
+  if(e.status==='northstar')return 100;
+  if(e.status==='fav')      return 50;
+  if(e.status==='caution')  return 10;
+  if(e.status==='avoid')    return 0;
+  return 25;
+}
+
+function sortHistory(arr){
+  return [...arr].sort((a,b)=>{
+    const sd=scoreEntry(b)-scoreEntry(a);
+    if(sd!==0)return sd;
+    return history.indexOf(b)-history.indexOf(a);
+  });
+}
+
+const badgeClass={
+  "Indica":"badge-indica","Sativa":"badge-sativa","Hybrid":"badge-hybrid",
+  "Hybrid Sativa":"badge-hybrid-s","Sativa Hybrid":"badge-hybrid-s","Hybrid Indica":"badge-hybrid-i"
+};
+function typeBadge(type){
+  const cls=badgeClass[type]||'badge-default';
+  return `<span class="badge ${cls}"><span class="badge-dot"></span>${type}</span>`;
+}
+
+const statusRowClass={northstar:'northstar',fav:'fav',caution:'caution',avoid:'avoid-row',''  :''};
+const sectionLabels={
+  northstar:{cls:'gold',label:'North Star'},
+  fav:      {cls:'sage',label:'Confirmed Winners'},
+  '':       {cls:'muted',label:'Untested'},
+  caution:  {cls:'amber',label:'Use Carefully'},
+  avoid:    {cls:'rose',label:'Avoid'},
+};
+
+function renderHistory(items){
+  if(!items.length)return '<div class="empty">No strains found.</div>';
+  const input=document.getElementById('searchInput');
+  const isSearching=input&&input.value.trim().length>0;
+  let html='';
+
+  if(!isSearching){
+    const groups=['northstar','fav','','caution','avoid'];
+    groups.forEach(status=>{
+      const group=items.filter(e=>e.status===status);
+      if(!group.length)return;
+      const{cls,label}=sectionLabels[status];
+      html+=`<div class="section-label ${cls}">${label}</div>`;
+      group.forEach((e,i)=>{html+=renderRow(e,status==='fav'?i+1:null);});
+    });
+  } else {
+    items.forEach(e=>{html+=renderRow(e,null);});
+  }
+  return html;
+}
+
+function renderRow(e,rankNum){
+  const rc=statusRowClass[e.status]||'';
+  const rank=rankNum?`<span class="rank-badge">#${rankNum}</span>`:'';
+  return `
+    <div class="strain-row ${rc}">
+      <div class="strain-left"></div>
+      <div class="strain-body">
+        <div class="strain-name">${e.strain}</div>
+        ${e.notes?`<div class="strain-notes">${e.notes}</div>`:''}
+        ${e.color?`<div class="strain-cap">Cap: ${e.color}</div>`:''}
+      </div>
+      <div class="strain-meta">
+        ${rank}
+        ${typeBadge(e.type)}
+        <span class="strain-date">${e.date}</span>
+      </div>
+    </div>`;
+}
+
+function filterHistory(){
+  const input=document.getElementById('searchInput');
+  const list=document.getElementById('historyList');
+  const count=document.getElementById('resultCount');
+  if(!list)return;
+  const q=input?input.value.toLowerCase().trim():'';
+  const base=sortHistory(history);
+  const filtered=q?base.filter(e=>
+    e.strain.toLowerCase().includes(q)||e.notes.toLowerCase().includes(q)||e.type.toLowerCase().includes(q)
+  ):base;
+  if(count)count.textContent=q?`${filtered.length} result${filtered.length!==1?'s':''}`:'';
+  list.innerHTML=renderHistory(filtered);
+}
+
+document.addEventListener('DOMContentLoaded',filterHistory);
+window.addEventListener('load',filterHistory);
+setTimeout(filterHistory,120);
+
+function showTab(n){
+  document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('active',i===n));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

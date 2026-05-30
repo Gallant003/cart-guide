@@ -5,40 +5,40 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover"/>
 <title>Cart Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
 :root {
-  --bg:          #f2f2f7;
-  --surface:     #ffffff;
-  --surface2:    #f9f9f9;
-  --border:      #e0e0e5;
-  --border2:     #c8c8d0;
-  --text:        #1c1c1e;
-  --text2:       #3a3a3c;
-  --muted:       #6c6c70;
-  --faint:       #aeaeb2;
-  --sage:        #4a6e52;
-  --sage-light:  #6a9070;
-  --sage-bg:     #edf4ee;
-  --sage-border: #bdd4c0;
-  --amber:       #7a5e20;
-  --amber-bg:    #faf0d8;
-  --amber-border:#d4b870;
-  --rose:        #7a3030;
-  --rose-bg:     #faf0f0;
-  --rose-border: #d49090;
-  --gold:        #8a6818;
-  --gold-bg:     #fdf5e0;
-  --gold-border: #d4b040;
+  --bg:          #1a2e1c;
+  --surface:     #243327;
+  --surface2:    #1e2e20;
+  --border:      #304835;
+  --border2:     #3d5a42;
+  --text:        #f0f4f0;
+  --text2:       #c8d8ca;
+  --muted:       #8aaa8e;
+  --faint:       #5a7a5e;
+  --sage:        #a8d4a8;
+  --sage-light:  #c0e0c0;
+  --sage-bg:     #243327;
+  --sage-border: #3d5a42;
+  --amber:       #d4a840;
+  --amber-bg:    #2a2510;
+  --amber-border:#6a5820;
+  --rose:        #d48080;
+  --rose-bg:     #2a1818;
+  --rose-border: #6a3030;
+  --gold:        #d4a840;
+  --gold-bg:     #2a2510;
+  --gold-border: #6a5820;
   --radius:      14px;
   --radius-sm:   10px;
-  --shadow:      0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
-  --shadow-hover:0 2px 6px rgba(0,0,0,0.08), 0 8px 20px rgba(0,0,0,0.06);
+  --shadow:      0 1px 4px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2);
+  --shadow-hover:0 2px 8px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.3);
 }
 
-html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;}
+html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased;}
 
 /* ── HEADER ── */
 .header{
@@ -48,9 +48,9 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
   padding-right:max(20px,env(safe-area-inset-right));
 }
 .header-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.18em;color:var(--faint);margin-bottom:10px;text-transform:uppercase;}
-.header-title{font-family:'Lora',serif;font-size:28px;font-weight:600;color:var(--text);letter-spacing:-0.02em;line-height:1.1;}
+.header-title{font-family:'Fraunces',serif;font-size:28px;font-weight:600;color:var(--text);letter-spacing:-0.02em;line-height:1.1;}
 .header-rule{width:28px;height:2px;background:var(--sage);border-radius:2px;margin:10px 0 8px;}
-.header-sub{font-size:13px;color:var(--muted);font-weight:300;letter-spacing:0.01em;font-style:italic;font-family:'Lora',serif;margin-bottom:4px;}
+.header-sub{font-size:13px;color:var(--muted);font-weight:300;letter-spacing:0.01em;font-style:italic;font-family:'Fraunces',serif;margin-bottom:4px;}
 
 /* ── TABS ── */
 .tab-bar{
@@ -60,14 +60,14 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
   padding:0 6px;
   -webkit-overflow-scrolling:touch;scrollbar-width:none;
   position:sticky;top:0;z-index:100;
-  box-shadow:0 1px 0 var(--border),0 2px 8px rgba(0,0,0,0.04);
+  box-shadow:0 1px 0 var(--border),0 2px 12px rgba(0,0,0,0.3);
 }
 .tab-bar::-webkit-scrollbar{display:none;}
 .tab-btn{
   flex-shrink:0;background:none;border:none;
   border-bottom:2px solid transparent;
   color:var(--faint);
-  font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:500;
+  font-family:'Inter',sans-serif;font-size:12.5px;font-weight:500;
   padding:14px 14px 12px;cursor:pointer;
   white-space:nowrap;
   transition:color 0.2s,border-color 0.2s;
@@ -99,10 +99,10 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
 
 /* North star card — special treatment */
 .card-northstar{
-  background:linear-gradient(135deg,#eef5ec 0%,#f5f9f4 100%);
-  border:1.5px solid #a8caa8;
+  background:linear-gradient(135deg,#243327 0%,#2a3d2c 100%);
+  border:1.5px solid #4a6e52;
   border-radius:var(--radius);padding:18px 20px;
-  box-shadow:0 2px 8px rgba(74,110,82,0.12),0 0 0 4px rgba(74,110,82,0.04);
+  box-shadow:0 2px 8px rgba(0,0,0,0.3),0 0 0 4px rgba(168,212,168,0.06);
 }
 
 /* ── SECTION LABELS ── */
@@ -130,8 +130,8 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
   transition:box-shadow 0.15s;
 }
 .strain-row:active{box-shadow:var(--shadow-hover);}
-.strain-row.northstar{background:linear-gradient(135deg,#eef5ec,#f5f9f4);border:1.5px solid #a8caa8;box-shadow:0 2px 8px rgba(74,110,82,0.1);}
-.strain-row.fav      {background:var(--surface);border-color:#d4c898;}
+.strain-row.northstar{background:linear-gradient(135deg,#243327,#2a3d2c);border:1.5px solid #4a6e52;box-shadow:0 2px 8px rgba(0,0,0,0.3);}
+.strain-row.fav      {background:var(--surface);border-color:#4a3e18;}
 .strain-row.caution  {background:var(--amber-bg);border-color:var(--amber-border);}
 .strain-row.avoid-row{background:var(--rose-bg);border-color:var(--rose-border);}
 
@@ -143,7 +143,7 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
 .strain-row:not(.northstar):not(.fav):not(.caution):not(.avoid-row) .strain-left{background:var(--border2);}
 
 .strain-body{flex:1;min-width:0;}
-.strain-name{font-family:'Lora',serif;font-size:15px;font-weight:600;color:var(--text);line-height:1.3;}
+.strain-name{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--text);line-height:1.3;}
 .strain-notes{font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.5;font-style:italic;}
 .strain-cap{font-size:11px;color:var(--faint);margin-top:5px;}
 .strain-meta{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;}
@@ -168,31 +168,32 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
 .badge-default {background:#edeae6;color:#585048;}.badge-default .badge-dot {background:#908070;}
 
 /* ── SEARCH ── */
-.sticky-search{position:sticky;top:49px;z-index:50;padding:12px 0 6px;margin:0;background:#f2f2f7;}
-.search-wrap{position:relative;background:#f2f2f7;}
+.sticky-search{position:sticky;top:49px;z-index:50;padding:12px 0 6px;margin:0;background:#1a2e1c;}
+.search-wrap{position:relative;background:#1a2e1c;}
 .search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:14px;pointer-events:none;z-index:1;}
 .search-input{
   width:100%;
-  background:#ffffff !important;
+  background:#243327 !important;
   -webkit-appearance:none !important;
   appearance:none !important;
-  border:1.5px solid #e0e0e5 !important;
+  border:1.5px solid #304835 !important;
   border-radius:10px !important;
   -webkit-border-radius:10px !important;
   padding:12px 14px 12px 40px !important;
-  color:#1c1c1e !important;
+  color:#f0f4f0 !important;
   font-size:16px !important;
-  font-family:'DM Sans',sans-serif !important;
+  font-family:'Inter',sans-serif !important;
   outline:none !important;
   box-shadow:none !important;
   -webkit-box-shadow:none !important;
   display:block;
   margin:0;
 }
+.search-input::placeholder{color:#5a7a5e !important;}
 .search-input:focus{
-  border-color:#6a9070 !important;
-  box-shadow:0 0 0 3px rgba(74,110,82,0.1) !important;
-  -webkit-box-shadow:0 0 0 3px rgba(74,110,82,0.1) !important;
+  border-color:#a8d4a8 !important;
+  box-shadow:0 0 0 3px rgba(168,212,168,0.12) !important;
+  -webkit-box-shadow:0 0 0 3px rgba(168,212,168,0.12) !important;
 }
 .result-count{font-size:11px;color:var(--faint);margin-top:5px;padding-left:2px;}
 
@@ -212,8 +213,8 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
 .dispo-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
 .dispo-header{padding:14px 18px 10px;border-bottom:1px solid var(--border);}
 .dispo-body{padding:12px 18px 14px;display:flex;flex-direction:column;gap:4px;}
-.dispo-featured{background:linear-gradient(135deg,var(--sage-bg),#f0f7f0);border-color:var(--sage-border);}
-.dispo-featured .dispo-header{background:linear-gradient(135deg,rgba(74,110,82,0.06),transparent);}
+.dispo-featured{background:linear-gradient(135deg,#243327,#2a3d2c);border-color:#4a6e52;}
+.dispo-featured .dispo-header{background:linear-gradient(135deg,rgba(168,212,168,0.06),transparent);}
 .dispo-tag{font-size:9.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);background:var(--sage-bg);border:1px solid var(--sage-border);border-radius:999px;padding:2px 8px;display:inline-block;margin-bottom:4px;}
 
 /* ── LINK BUTTON ── */
@@ -221,10 +222,10 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
 .link-btn:active{opacity:0.7;}
 
 /* ── EMPTY ── */
-.empty{text-align:center;color:var(--faint);padding:48px 20px;font-size:14px;font-style:italic;font-family:'Lora',serif;}
+.empty{text-align:center;color:var(--faint);padding:48px 20px;font-size:14px;font-style:italic;font-family:'Fraunces',serif;}
 
 /* ── UTILITY ── */
-.lora{font-family:'Lora',serif;}
+.lora{font-family:'Fraunces',serif;}
 .row{display:flex;justify-content:space-between;align-items:center;gap:8px;}
 .row-start{display:flex;align-items:center;gap:8px;}
 </style>
@@ -233,7 +234,6 @@ html,body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-seri
 
 <!-- HEADER -->
 <div class="header">
-  <div class="header-eyebrow">Pleasantrees · Sterling Heights</div>
   <div class="header-title">Cart Guide</div>
   <div class="header-rule"></div>
   <div class="header-sub">A curated reference for finding the right cart, every time.</div>
